@@ -1,6 +1,10 @@
 ﻿using CommonLayer;
 using ManagerLayer.Interfaces;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
+using System.Linq;
+using System.Numerics;
 
 namespace HospitalManagementApp.Controllers
 {
@@ -33,5 +37,41 @@ namespace HospitalManagementApp.Controllers
             }
             return View(model);
         }
+        [HttpGet]
+        public IActionResult Login()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Login([Bind] UserLoginModel login)
+        {
+            if (ModelState.IsValid)
+            {
+                var res=userManager.Login(login);
+                if (res != null)
+                {
+                    DoctorModel doctor = new DoctorModel();
+                    HttpContext.Session.SetInt32("userId", res.UserId);
+                    //HttpContext.Session.SetString("Email", res.Email);
+                    HttpContext.Session.SetInt32("RoleId", res.RoleId);
+                    HttpContext.Session.SetInt32("DoctorId", doctor.DoctorId);
+                    return RedirectToAction("Index", "Home");
+                }
+            }
+            return View(login);
+        }
+        [HttpGet]
+        public IActionResult GetAllRecords()
+        {
+            List<UserRegistrationModel> list = new List<UserRegistrationModel>();
+            int roleId = (int)HttpContext.Session.GetInt32("RoleId");
+            if (roleId == 1)
+            {
+                list = userManager.GetAllRecords().ToList();
+                return View(list);
+            }
+            return RedirectToAction("Login", "User");
+        } 
     }
 }

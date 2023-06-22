@@ -3,51 +3,49 @@ using ManagerLayer.Interfaces;
 using RepositoryLayer.Interfaces;
 using System;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using System.Text;
 
 namespace ManagerLayer.Services
 {
-    public class UserManager : IUserManager
+    public class DoctorManager : IDoctorManager
     {
-        private readonly IUserRepository userRepository;
-        public UserManager(IUserRepository userRepository)
+        private readonly IDoctorRepository doctorRepository;
+        public DoctorManager(IDoctorRepository doctorRepository)
         {
-            this.userRepository = userRepository;
+            this.doctorRepository = doctorRepository;
         }
-        public UserRegistrationModel Registration(UserRegistrationModel model)
+        public DoctorModel AddDoctorDetails(DoctorModel doctor)
         {
             try
             {
-                return userRepository.Registration(model);
+                return doctorRepository.AddDoctorDetails(doctor);
             }
             catch(Exception e)
             {
                 throw e;
             }
         }
-        public UserRegistrationModel Login(UserLoginModel login)
+        public DoctorModel GetDoctorById(int doctorId)
         {
             try
             {
-                return userRepository.Login(login);
+                return doctorRepository.GetDoctorById(doctorId);
             }
             catch(Exception e)
             {
                 throw e;
             }
         }
-        public List<UserRegistrationModel> GetAllRecords()
+        public DoctorModel GetDoctorByUserId(int userId)
         {
             try
             {
-                return userRepository.GetAllRecords();
+                return doctorRepository.GetDoctorByUserId(userId);
             }
             catch(Exception e)
             {
                 throw e;
             }
         }
-        
     }
 }

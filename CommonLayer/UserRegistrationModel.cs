@@ -13,7 +13,6 @@ namespace CommonLayer
         public string Password { get; set; }
         public long Mobile { get; set; }
         public string Gender { get; set; }
-        public DateTime Dob { get; set; }
         public int RoleId { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime ModifiedAt { get; set; }

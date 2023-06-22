@@ -27,9 +27,18 @@ namespace HospitalManagementApp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            
             services.AddControllersWithViews();
             services.AddTransient<IUserRepository, UserReposioty>();
             services.AddTransient<IUserManager, UserManager>();
+            services.AddTransient<IDoctorRepository,DoctorRepository>();
+            services.AddTransient<IDoctorManager, DoctorManager>();
+            services.AddTransient<IPatientRepository, PatientRepository>();
+            services.AddTransient<IPatientManager, PatientManager>();
+            services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromHours(1);
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -51,12 +60,13 @@ namespace HospitalManagementApp
             app.UseRouting();
 
             app.UseAuthorization();
+            app.UseSession();
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=User}/{action=Login}/{id?}");
             });
         }
     }
