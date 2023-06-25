@@ -9,5 +9,7 @@ namespace ManagerLayer.Interfaces
     {
         public PatientModel AddPatientDetails(PatientModel patient);
         public PatientModel GetPatientbyId(int patientId);
+        public PatientModel GetPatientByUserId(int userId);
+        public List<PatientModel> GetAllPatients();
     }
 }

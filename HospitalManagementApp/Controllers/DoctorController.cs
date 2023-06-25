@@ -2,6 +2,7 @@
 using ManagerLayer.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using System.Numerics;
 
 namespace HospitalManagementApp.Controllers
@@ -54,7 +55,31 @@ namespace HospitalManagementApp.Controllers
             {
                 int userId = (int)HttpContext.Session.GetInt32("userId");
                 var res = doctorManager.GetDoctorByUserId(userId);
-                return View(res);
+                if (res != null)
+                {
+                    HttpContext.Session.SetInt32("DoctorId", res.DoctorId);
+                    return View(res);
+                }
+                
+            }
+            return RedirectToAction("Login", "User");
+        }
+        [HttpGet]
+        public IActionResult GetAllDoctors()
+        {
+            if (ModelState.IsValid)
+            {
+                int roleId = (int)HttpContext.Session.GetInt32("RoleId");
+                if (roleId == 3)
+                {
+                    List<DoctorModel> list = new List<DoctorModel>();
+                    list = doctorManager.GetAllDoctors();
+                    foreach(DoctorModel item in list)
+                    {
+                        HttpContext.Session.SetInt32("DoctorId", item.DoctorId);
+                    }
+                    return View(list);
+                }
             }
             return RedirectToAction("Login", "User");
         }

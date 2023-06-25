@@ -1,0 +1,97 @@
+﻿@model IEnumerable<CommonLayer.DoctorModel>
+
+@{
+    ViewData["Title"] = "GetAllDoctors";
+}
+
+<h1>GetAllDoctors</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<!--<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.DoctorId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProfilePic)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Qualification)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Specialization)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Experience)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsTrash)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreatedAt)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ModifiedAt)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserId)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>-->
+@foreach (var item in Model) {
+    <div>
+        <div class="card">
+            <a href="@Url.Action("GetDoctorById","Doctor",new{DoctorId=item.DoctorId})">
+            <div class="card-header">
+                <h3>@item.ProfilePic</h3>
+            </div>
+            <div class="card-body">
+                <p><h6>Qualification</h6>@item.Qualification</p>
+                <p><h6>Specialization</h6>@item.Specialization</p>
+                <p><h6>Experience</h6>@item.Experience</p>
+                <p><h6>DoctorId</h6>@item.DoctorId</p>
+            </div>
+        </div>
+    </div>
+        <!--<tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.DoctorId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProfilePic)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Qualification)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Specialization)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Experience)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsTrash)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedAt)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ModifiedAt)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserId)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+    </tr>-->
+}
+   <!-- </tbody>
+</table>-->

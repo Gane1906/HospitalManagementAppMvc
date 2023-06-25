@@ -1,0 +1,104 @@
+﻿@model IEnumerable<CommonLayer.PatientModel>
+
+@{
+    ViewData["Title"] = "GetAllpatients";
+}
+
+<h1>GetAllpatients</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<!--<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.PatientId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProfilePic)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Concern)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Gender)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Age)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MedicalHiostory)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsTrash)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreatedAt)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ModifiedAt)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserId)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>-->
+@foreach (var item in Model) {
+    <div>
+        <div class="card">
+            <a href="@Url.Action("GetPatientById","Patient",new {PatientId=item.PatientId})">
+            <div class="card-header">
+                <h3>@item.ProfilePic</h3>
+            </div>
+            <div class="card-body">
+                <p><h6>PatientId</h6>@item.PatientId</p>
+                <p><h6>Concern</h6>@item.Concern</p>
+                <p><h6>Age</h6>@item.Age</p>
+                <p><h6>Gender</h6>@item.Gender</p>
+                <p><h6>MedicalHistory</h6>@item.MedicalHiostory</p>
+            </div>
+        </div>
+    </div>
+        <!--<tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.PatientId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProfilePic)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Concern)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Gender)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Age)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MedicalHiostory)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsTrash)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedAt)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ModifiedAt)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserId)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+    </tr>-->
+}
+    <!--</tbody>
+</table>-->

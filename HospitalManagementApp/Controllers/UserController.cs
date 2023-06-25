@@ -51,11 +51,13 @@ namespace HospitalManagementApp.Controllers
                 var res=userManager.Login(login);
                 if (res != null)
                 {
-                    DoctorModel doctor = new DoctorModel();
                     HttpContext.Session.SetInt32("userId", res.UserId);
                     //HttpContext.Session.SetString("Email", res.Email);
                     HttpContext.Session.SetInt32("RoleId", res.RoleId);
-                    HttpContext.Session.SetInt32("DoctorId", doctor.DoctorId);
+                    if (res.RoleId == 3)
+                    {
+                        return RedirectToAction("GetPatientByUserId", "Patient");
+                    }
                     return RedirectToAction("Index", "Home");
                 }
             }

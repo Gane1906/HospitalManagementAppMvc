@@ -60,11 +60,14 @@ namespace RepositoryLayer.Services
                 {
                     DoctorModel doctor = new DoctorModel();
                     doctor.DoctorId = reader.GetInt32(0);
-                    //doctor.ProfilePic = reader.GetString(1);
+                    doctor.ProfilePic = reader.GetString(1);
                     doctor.Qualification = reader.GetString(2);
                     doctor.Specialization = reader.GetString(3);
                     doctor.Experience = reader.GetInt32(4);
+                    doctor.CreatedAt = reader.GetDateTime(6);
+                    doctor.ModifiedAt = reader.GetDateTime(7);
                     doctor.UserId = reader.GetInt32(8);
+                    con.Close();
                     return doctor;
                 }
                 return null;
@@ -84,14 +87,45 @@ namespace RepositoryLayer.Services
                 {
                     DoctorModel doctor = new DoctorModel();
                     doctor.DoctorId = reader.GetInt32(0);
-                    //doctor.ProfilePic = reader.GetString(1);
+                    doctor.ProfilePic = reader.GetString(1);
                     doctor.Qualification = reader.GetString(2);
                     doctor.Specialization = reader.GetString(3);
                     doctor.Experience = reader.GetInt32(4);
+                    doctor.CreatedAt = reader.GetDateTime(6);
+                    doctor.ModifiedAt = reader.GetDateTime(7);
                     doctor.UserId = reader.GetInt32(8);
+                    con.Close();
                     return doctor;
                 }
                 return null;
+            }
+        }
+        public List<DoctorModel> GetAllDoctors()
+        {
+            List<DoctorModel> list = new List<DoctorModel>();
+            SqlConnection con = new SqlConnection(connectionString);
+            using (con)
+            {
+                SqlCommand cmd = new SqlCommand("GetAllDoctors", con)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+                con.Open();
+                SqlDataReader reader=cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    DoctorModel doctor = new DoctorModel();
+                    doctor.DoctorId = reader.GetInt32(0);
+                    doctor.ProfilePic = reader.GetString(1);
+                    doctor.Qualification = reader.GetString(2);
+                    doctor.Specialization = reader.GetString(3);
+                    doctor.Experience = reader.GetInt32(4);
+                    doctor.CreatedAt = reader.GetDateTime(6);
+                    doctor.ModifiedAt = reader.GetDateTime(7);
+                    doctor.UserId = reader.GetInt32(8);
+                    list.Add(doctor);
+                }
+                return list;
             }
         }
     }

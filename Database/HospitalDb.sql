@@ -104,7 +104,7 @@ execute GetRecords;
 ----------------------
 create table Doctors(
 DoctorId int primary key identity(100,1),
-ProfilePic image,
+ProfilePic varchar(250),
 Qualification varchar(50),
 Specialization varchar(50),
 Experience int,
@@ -116,8 +116,10 @@ userId int foreign key references Users(userId)
 
 select * from Doctors;
 
-Create Procedure InsertDoctor
-@ProfilePic image,
+Drop table Doctors;
+
+alter Procedure InsertDoctor
+@ProfilePic varchar(250),
 @Qualification varchar(50),
 @Specialization varchar(50),
 @Experience int,
@@ -145,6 +147,8 @@ select GetDate();
 
 select * from Doctors;
 
+delete from Doctors where DoctorId=100;
+
 
 
 ------------------------
@@ -152,7 +156,7 @@ select * from Doctors;
 Create table Patients
 (
 PatientId int primary key identity(1000,1),
-profilePic image,
+profilePic varchar(250),
 Concern varchar(50),
 Gender varchar(6),
 Age int,
@@ -165,9 +169,8 @@ userId int foreign key references Users(userId)
 select * from Patients;
 
 
-
-create procedure InsertPatients	
-@ProfilePic image,
+alter procedure InsertPatients	
+@ProfilePic varchar(250),
 @Concern varchar(50),
 @Gender varchar(6),
 @Age int,
@@ -263,3 +266,22 @@ else
 print 'Patient not exists'
 End
 Execute GetPatientByUserId @userId=7;
+
+-------------------------
+
+create Procedure GetAllDoctors
+As
+Begin
+Select * from Doctors;
+End
+
+Execute GetAllDoctors
+------------------
+
+Create procedure GetAllPatients
+As
+Begin
+Select * from Patients;
+End
+
+Execute GetAllPatients;

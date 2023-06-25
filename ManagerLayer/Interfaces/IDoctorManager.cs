@@ -10,5 +10,6 @@ namespace ManagerLayer.Interfaces
         public DoctorModel AddDoctorDetails(DoctorModel doctor);
         public DoctorModel GetDoctorById(int doctorId);
         public DoctorModel GetDoctorByUserId(int userId);
+        public List<DoctorModel> GetAllDoctors();
     }
 }

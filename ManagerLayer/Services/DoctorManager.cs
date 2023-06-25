@@ -47,5 +47,16 @@ namespace ManagerLayer.Services
                 throw e;
             }
         }
+        public List<DoctorModel> GetAllDoctors()
+        {
+            try
+            {
+                return doctorRepository.GetAllDoctors();
+            }
+            catch(Exception e)
+            {
+                throw e;
+            }
+        }
     }
 }

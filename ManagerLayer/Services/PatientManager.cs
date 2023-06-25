@@ -37,5 +37,28 @@ namespace ManagerLayer.Services
                 throw e;
             }
         }
+        public PatientModel GetPatientByUserId(int userId)
+        {
+            try
+            {
+                return patientRepository.GetPatientByUserId(userId);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+        public List<PatientModel> GetAllPatients()
+        {
+            try
+            {
+
+                return patientRepository.GetAllPatients();
+            }
+            catch(Exception e)
+            {
+                throw e;
+            }
+        }
     }
 }
